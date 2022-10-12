@@ -17,6 +17,7 @@ runs:
         version: ${{ inputs.version }}
 
     - name: Build app
+      shell: bash
       run: |
         ti build -p android -b -l info
 
