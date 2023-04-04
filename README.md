@@ -8,7 +8,7 @@ The project root has to be a Titanium App project in order to work.
 
 ## `version`
 
-By default, the `11.1.1.GA` will be used. But you can change it to a custom version too.
+By default, the `12.0.0.GA` will be used. But you can change it to a custom version too.
 
 # Store version
 
