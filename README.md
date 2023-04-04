@@ -34,4 +34,6 @@ jobs:
         uses:  m1ga/titanium-android-build@v2
         with:
           version: 12.0.0.GA
+          keystore: ${{ secrets.ANDROID_KEYSTORE }}
+          keystore_secret: "${{ secrets.ANDROID_KEYSTORE_SECRET }}"
 ```

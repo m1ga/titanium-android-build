@@ -6,6 +6,14 @@ inputs:
     description: "The Titanium SDK version you want to install. e.g. 12.0.0.GA"
     required: false
     default: "12.0.0.GA"
+  keystore:
+    description: 'Base64 encoded keystore file. Required for a store build'
+    required: false
+    default: ''
+  keystore_secret:
+    description: 'Keystore password. Required for a store build'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -18,8 +26,8 @@ runs:
 
     - name: Build app (store)
       env:
-          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-          ANDROID_KEYSTORE_SECRET: ${{ secrets.ANDROID_KEYSTORE_SECRET }}
+          ANDROID_KEYSTORE: ${{ inputs.keystore }}
+          ANDROID_KEYSTORE_SECRET: ${{ inputs.keystore_secret }}
       shell: bash
       if: ${{ env.ANDROID_KEYSTORE_SECRET != '' }}
       run: |
@@ -27,8 +35,8 @@ runs:
         ti build -p android -T dist-playstore -K keystore.keystore -O ./dist -P $ANDROID_KEYSTORE_SECRET
     - name: Build app (debug)
       env:
-          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-          ANDROID_KEYSTORE_SECRET: ${{ secrets.ANDROID_KEYSTORE_SECRET }}
+          ANDROID_KEYSTORE: ${{ inputs.keystore }}
+          ANDROID_KEYSTORE_SECRET: ${{ inputs.keystore_secret }}
       shell: bash
       if: ${{ env.ANDROID_KEYSTORE_SECRET == '' }}
       run: |
